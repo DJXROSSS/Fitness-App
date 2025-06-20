@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  google_fonts: ^6.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -56,6 +56,7 @@ flutter:
 
   assets:
     - assets/Drawer_images/
+    - assets/SuggestedWorkout_images/
   #   - Drawer_images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
