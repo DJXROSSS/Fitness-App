@@ -1,14 +1,13 @@
+import 'package:befit/pages/About_page.dart';
 import 'package:befit/pages/BMI_calculator.dart';
+import 'package:befit/pages/Progress_page.dart';
 import 'package:befit/pages/Settings_page.dart';
 import 'package:befit/pages/Suggested_page.dart';
 import 'package:befit/pages/home_page.dart';
 import 'package:befit/pages/intake_page.dart';
+import 'package:befit/pages/login_page.dart';
 import 'package:befit/pages/profile_page.dart';
 import 'package:flutter/material.dart';
-
-
-// Import your separate page files here
-
 
 void main() => runApp(BeFitApp());
 
@@ -33,7 +32,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 2; // Home is initially selected
 
-  // List of pages to display for each BottomNavigationBar index
   final List<Widget> _pages = [
     BMIcalculatorPage(),
     DietPage(),
@@ -97,23 +95,67 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFFB083EF),
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+                color: Color(0x00ffa726),
+                image: DecorationImage(
+                  image: AssetImage('assets/Drawer_images/img_2.png'),
+
+                  fit: BoxFit.cover,
                 ),
+              ),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      icon: Icon(Icons.settings, color: Colors.black),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SettingsPage()),
+                        );
+                      },
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      'Menu',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: Icon(Icons.arrow_circle_right_rounded),
+              title: Text('Progress'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SettingsPage()),
+                  MaterialPageRoute(builder: (context) => Progresspage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About Us'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Aboutpage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => loginpage()),
                 );
               },
             ),
@@ -121,9 +163,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
 
-      // Switch pages based on bottom nav
+      // Main content changes with bottom navigation
       body: _pages[_selectedIndex],
 
+      // Bottom Navigation Bar
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Color(0xFFD9A7A0),
