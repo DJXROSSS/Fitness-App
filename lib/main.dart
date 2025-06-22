@@ -1,4 +1,5 @@
 import 'package:befit/pages/app_theme.dart';
+import 'package:befit/pages/premium_page.dart';
 import 'package:flutter/material.dart';
 import 'package:befit/pages/About_page.dart';
 import 'package:befit/pages/BMI_calculator.dart';
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     BMIcalculatorPage(),
     DietPage(),
     MainHomePage(),
-    WorkoutPage(),
+    SuggestedPage(),
     ProfilePage(),
   ];
 
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         drawer: Drawer(
           child: Container(
-            color: Colors.black,
+            color: Colors.white,
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
@@ -116,15 +117,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 ListTile(
                   leading: Icon(Icons.bar_chart, color: AppTheme.drawerIconColor),
-                  title: Text('Progress', style: TextStyle(color: Colors.white)),
+                  title: Text('Progress', style: TextStyle(color: Colors.black)),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Progresspage()),
                   ),
                 ),
                 ListTile(
+                  leading: Icon(Icons.money, color: AppTheme.drawerIconColor),
+                  title: Text('вєƒιт Premium', style: TextStyle(color: Colors.black)),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => premiumpage()),
+                  ),
+                ),
+                ListTile(
                   leading: Icon(Icons.info_outline, color: AppTheme.drawerIconColor),
-                  title: Text('About Us', style: TextStyle(color: Colors.white)),
+                  title: Text('About Us', style: TextStyle(color: Colors.black)),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Aboutpage()),
@@ -132,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 ListTile(
                   leading: Icon(Icons.logout, color: AppTheme.logoutColor),
-                  title: Text('Logout', style: TextStyle(color: Colors.white)),
+                  title: Text('Logout', style: TextStyle(color: Colors.black)),
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => loginpage()),
