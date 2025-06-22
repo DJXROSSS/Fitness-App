@@ -10,6 +10,8 @@ import 'package:befit/pages/home_page.dart';
 import 'package:befit/pages/intake_page.dart';
 import 'package:befit/pages/login_page.dart';
 import 'package:befit/pages/profile_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 void main() => runApp(BeFitApp());
 
@@ -36,6 +38,62 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 2;
+
+  Widget _buildNavItem(IconData icon, IconData activeIcon, String label, int index) {
+    final bool isSelected = index == _selectedIndex;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => _onItemTapped(index),
+        behavior: HitTestBehavior.opaque,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              isSelected ? activeIcon : icon,
+              color: Colors.white,
+            ),
+            // const SizedBox(height: 4),
+            // Text(
+            //   label,
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontSize: 10,
+            //   ),
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSvgNavItem(String icon, String activeIcon, String label, int index) {
+    final bool isSelected = index == _selectedIndex;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => _onItemTapped(index),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              isSelected ? activeIcon : icon,
+              width: 24,
+              height: 24,
+              color: Colors.white,
+            ),
+            // const SizedBox(height: 4),
+            // Text(
+            //   label,
+            //   style: TextStyle(
+            //     color: Colors.white,
+            //     fontSize: 10,
+            //   ),
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+
 
   final List<Widget> _pages = [
     BMIcalculatorPage(),
@@ -152,42 +210,127 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: _pages[_selectedIndex],
+        // bottomNavigationBar: Container(
+        //   decoration: BoxDecoration(
+        //     color: Colors.black,
+        //     borderRadius: BorderRadius.only(
+        //       topLeft: Radius.circular(20),
+        //       topRight: Radius.circular(20),
+        //     ),
+        //   ),
+        //   padding: EdgeInsets.symmetric(vertical: 0),
+        //   child: Stack(
+        //     children: [
+        //       BottomNavigationBar(
+        //         currentIndex: _selectedIndex,
+        //         // type: BottomNavigationBarType.fixed,
+        //         elevation: 0,
+        //         onTap: _onItemTapped,
+        //         items: [
+        //           BottomNavigationBarItem(
+        //             icon: Icon(Icons.calculate_outlined),
+        //             activeIcon: Icon(Icons.calculate),
+        //             label: 'Calculator',
+        //           ),
+        //           BottomNavigationBarItem(
+        //             icon: Icon(Icons.egg_alt_outlined),
+        //             activeIcon: Icon(Icons.egg_alt),
+        //             label: 'Diet',
+        //           ),
+        //           BottomNavigationBarItem(
+        //             icon: Icon(Icons.home_outlined),
+        //             activeIcon: Icon(Icons.home),
+        //             label: 'Home',
+        //           ),
+        //           BottomNavigationBarItem(
+        //             icon: SvgPicture.asset(
+        //               'assets/navBar_icons/dumbell_outlined.svg',
+        //               width: 24,
+        //               height: 24,
+        //             ),
+        //             activeIcon: SvgPicture.asset(
+        //               'assets/navBar_icons/dumbell.svg',
+        //               width: 24,
+        //               height: 24,
+        //             ),
+        //             label: 'Workout',
+        //           ),
+        //           BottomNavigationBarItem(
+        //             icon: Icon(Icons.person_outline),
+        //             activeIcon: Icon(Icons.person),
+        //             label: 'Profile',
+        //           ),
+        //         ],
+        //       ),
+        //       Positioned(
+        //         bottom: 8,
+        //         child: AnimatedAlign(
+        //           alignment: [
+        //             Alignment(-1.0, 0),
+        //             Alignment(-0.5, 0),
+        //             Alignment(0.0, 0),
+        //             Alignment(0.5, 0),
+        //             Alignment(1.0, 0),
+        //           ][_selectedIndex],
+        //           duration: const Duration(milliseconds: 300),
+        //           child: Container(
+        //             width: 40,
+        //             height: 4,
+        //             decoration: BoxDecoration(
+        //               color: Colors.white,
+        //               borderRadius: BorderRadius.circular(2),
+        //             ),
+        //           ),
+        //         )
+        //       )
+        //     ]
+        //   ),
+        // ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             color: Colors.black,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
           ),
-          padding: EdgeInsets.symmetric(vertical: 6),
-          child: BottomNavigationBar(
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.calculate_outlined),
-                label: 'Calculator',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.restaurant_menu),
-                label: 'Diet',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.fitness_center),
-                label: 'Workout',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline),
-                label: 'Profile',
-              ),
-            ],
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          height: 70,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final double itemWidth = constraints.maxWidth / 5;
+              return Stack(
+                children: [
+                  Row(
+                    children: [
+                      _buildNavItem(Icons.calculate_outlined, Icons.calculate, 'Calculator', 0),
+                      _buildNavItem(Icons.egg_alt_outlined, Icons.egg_alt, 'Diet', 1),
+                      _buildNavItem(Icons.home_outlined, Icons.home, 'Home', 2),
+                      _buildSvgNavItem('assets/navBar_icons/dumbell_outlined.svg',
+                          'assets/navBar_icons/dumbell.svg', 'Workout', 3),
+                      _buildNavItem(Icons.person_outline, Icons.person, 'Profile', 4),
+                    ],
+                  ),
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                    left: _selectedIndex * itemWidth + (itemWidth / 2) - 20, // center the bar
+                    bottom: 8,
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
+
       ),
     );
   }
