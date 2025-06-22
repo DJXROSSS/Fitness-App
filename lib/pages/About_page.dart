@@ -27,10 +27,7 @@ class Aboutpage extends StatelessWidget {
         child: ListView(
           children: [
             Center(
-              child: Image.asset(
-                'assets/Drawer_images/img.png',
-                height: 100,
-              ),
+              child: Image.asset('assets/Drawer_images/img.png', height: 100),
             ),
             SizedBox(height: 20),
             Text(
@@ -46,13 +43,21 @@ class Aboutpage extends StatelessWidget {
             SizedBox(height: 20),
             Text(
               'BeFit is your personal fitness companion designed to guide you towards a healthier lifestyle. Whether you’re tracking your BMI, planning your meals, or following your workout progress, BeFit empowers you every step of the way.',
-              style: TextStyle(fontSize: 16, color: Colors.black87, height: 1.4),
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black87,
+                height: 1.4,
+              ),
               textAlign: TextAlign.justify,
             ),
             SizedBox(height: 30),
             Text(
               'Developed By',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             SizedBox(height: 8),
             Text(
@@ -62,7 +67,11 @@ class Aboutpage extends StatelessWidget {
             SizedBox(height: 30),
             Text(
               'Version',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             SizedBox(height: 8),
             Text(
